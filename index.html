@@ -3,14 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WSAT Group 1 Project</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Community Healthcare Center - Dashboard</title>
+    <!-- Linked External CSS -->
+    <link rel="stylesheet" href="assets/css/global.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome, WSAT Group 1!</h1>
-    <p>test coding
-        </p>
+
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>HealthCenter LGU</h2>
+                <div class="user-profile">
+                    <span id="user-name">Juan Dela Cruz</span>
+                    <span id="user-role" class="badge">Receptionist</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-tab="receptionist">Reception Desk</a></li>
+                    <li><a href="#" class="nav-link" data-tab="doctor">Doctor Consultation</a></li>
+                    <li><a href="#" class="nav-link" data-tab="cashier">Billing & Cashier</a></li>
+                    <li><a href="#" class="nav-link" data-tab="pharmacist">Pharmacy Inventory</a></li>
+                    <li><a href="#" class="nav-link" data-tab="admin">System Audit Logs</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-danger">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main View Section -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="page-title">Reception Desk</h1>
+                <div id="clock" class="system-clock">00:00:00 AM</div>
+            </header>
+
+            <!-- Notification Toast Container -->
+            <div id="toast-container" class="toast-container"></div>
+
+            <!-- TAB 1: RECEPTIONIST MODULE -->
+            <section id="tab-receptionist" class="tab-content active">
+                <div class="card">
+                    <h3>Register New Patient</h3>
+                    <form id="patient-form" class="form-grid">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn btn-primary">Save Patient Record</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- TAB 2: DOCTOR MODULE -->
+            <section id="tab-doctor" class="tab-content">
+                <div class="card">
+                    <h3>Electronic Health Record (EHR) & Consultation</h3>
+                    <form id="consultation-form">
+                        <div class="form-group">
+                            <label for="patient-select">Select Patient</label>
+                            <select id="patient-select" required>
+                                <option value="">-- Choose Patient from Queue --</option>
+                                <option value="1">Maria Santos (ID: P-1001)</option>
+                                <option value="2">Pedro Penduko (ID: P-1002)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="diagnosis">Clinical Diagnosis</label>
+                            <input type="text" id="diagnosis" placeholder="e.g., Acute Upper Respiratory Infection" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clinical-notes">Consultation Notes</label>
+                            <textarea id="clinical-notes" rows="4" placeholder="Type doctor notes here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Complete Consultation</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- TAB 3: CASHIER MODULE -->
+            <section id="tab-cashier" class="tab-content">
+                <div class="card">
+                    <h3>Process Patient Billing</h3>
+                    <div class="billing-summary">
+                        <p><strong>Patient:</strong> Maria Santos</p>
+                        <p><strong>Consultation Fee:</strong> ₱300.00</p>
+                        <p><strong>Medicines Total:</strong> ₱150.00</p>
+                        <hr>
+                        <p class="total-amount"><strong>Total Amount Due:</strong> ₱450.00</p>
+                    </div>
+                    <button id="process-payment-btn" class="btn btn-success">Process Payment & Print Receipt</button>
+                </div>
+            </section>
+
+            <!-- TAB 4: PHARMACIST MODULE -->
+            <section id="tab-pharmacist" class="tab-content">
+                <div class="card">
+                    <h3>Medicine Stock Levels</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Medicine Name</th>
+                                <th>Category</th>
+                                <th>Stock</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Paracetamol 500mg</td>
+                                <td>Analgesic</td>
+                                <td>150</td>
+                                <td><span class="badge badge-success">In Stock</span></td>
+                            </tr>
+                            <tr class="low-stock">
+                                <td>Amoxicillin 500mg</td>
+                                <td>Antibiotic</td>
+                                <td>12</td>
+                                <td><span class="badge badge-danger">Low Stock</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB 5: ADMIN MODULE -->
+            <section id="tab-admin" class="tab-content">
+                <div class="card">
+                    <h3>System Audit Log Activity</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>User ID</th>
+                                <th>Action</th>
+                                <th>IP Address</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-log-body">
+                            <!-- Populated dynamically by main.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
     </div>
+
+    <!-- Linked External JavaScript -->
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
