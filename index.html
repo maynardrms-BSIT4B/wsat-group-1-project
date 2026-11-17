@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +11,11 @@
 <body>
 
     <div class="dashboard-container">
+        <!-- Mobile drawer overlay -->
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
         <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <aside id="sidebar" class="sidebar">
             <div class="sidebar-header">
                 <h2>TANGINAMO HealthCenter</h2>
                 <div class="user-profile">
@@ -38,7 +42,12 @@
         <!-- Main View Section -->
         <main class="main-content">
             <header class="top-header">
-                <h1 id="page-title">Reception Desk</h1>
+                <div class="header-left">
+                    <button id="menu-btn" class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+                        <span></span><span></span><span></span>
+                    </button>
+                    <h1 id="page-title">Reception Desk</h1>
+                </div>
                 <div id="clock" class="system-clock">00:00:00 AM</div>
             </header>
 
@@ -122,6 +131,7 @@
             <section id="tab-pharmacist" class="tab-content">
                 <div class="card">
                     <h3>Medicine Stock Levels</h3>
+                    <div class="table-wrapper">
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -146,6 +156,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </section>
 
@@ -153,6 +164,7 @@
             <section id="tab-admin" class="tab-content">
                 <div class="card">
                     <h3>System Audit Log Activity</h3>
+                    <div class="table-wrapper">
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -166,6 +178,7 @@
                             <!-- Populated dynamically by main.js -->
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </section>
         </main>

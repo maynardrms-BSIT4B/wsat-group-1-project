@@ -1,4 +1,27 @@
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    // 0. Mobile Sidebar Drawer
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const menuBtn = document.getElementById('menu-btn');
+
+    function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.classList.add('show');
+        menuBtn.setAttribute('aria-expanded', 'true');
+    }
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+        menuBtn.setAttribute('aria-expanded', 'false');
+    }
+    menuBtn.addEventListener('click', () => {
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+    overlay.addEventListener('click', closeSidebar);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 768) closeSidebar(); });
 
     // 1. Navigation & Tab Switching
     const navLinks = document.querySelectorAll('.nav-link');
@@ -20,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update page header title
             pageTitle.textContent = link.textContent;
+
+            // Close the drawer on mobile after choosing a tab
+            closeSidebar();
         });
     });
 
@@ -107,5 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addEventListener('mousemove', resetIdleTimer);
     window.addEventListener('keypress', resetIdleTimer);
+    window.addEventListener('touchstart', resetIdleTimer, { passive: true });
     resetIdleTimer();
-});
+}); 

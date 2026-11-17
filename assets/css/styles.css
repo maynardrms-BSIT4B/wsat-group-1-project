@@ -1,3 +1,4 @@
+
 /* Core Reset */
 * {
     box-sizing: border-box;
@@ -15,6 +16,7 @@ body {
 .dashboard-container {
     display: flex;
     height: 100vh;
+    height: 100dvh;
 }
 
 /* Sidebar Styles */
@@ -207,8 +209,81 @@ input:focus, select:focus, textarea:focus {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
+/* ---------- Responsive additions ---------- */
+.header-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.menu-btn { display: none; }
+.sidebar-overlay { display: none; }
+.table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.data-table { min-width: 480px; }
+.sidebar-nav { overflow-y: auto; }
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .sidebar { width: 220px; }
+    .main-content { padding: 22px; }
+}
+
+/* Phone & small tablet: sidebar becomes a slide-in drawer */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
+    .sidebar {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        width: 270px;
+        max-width: 85vw;
+        z-index: 1100;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        overflow-y: auto;
     }
+    .sidebar.open { transform: translateX(0); }
+
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 1050;
+    }
+    .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+
+    .menu-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 42px;
+        height: 42px;
+        padding: 0 10px;
+        background: #1e3a8a;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+    .menu-btn span { display: block; height: 2px; background: #fff; border-radius: 2px; }
+
+    .main-content { padding: 16px; }
+    .top-header { margin-bottom: 18px; padding-bottom: 12px; }
+    .top-header h1 { font-size: 1.25rem; }
+    .system-clock { font-size: 0.85rem; white-space: nowrap; }
+
+    .card { padding: 18px; }
+
+    /* Stack the form grid */
+    .form-grid { grid-template-columns: 1fr; }
+    .full-width { grid-column: auto; }
+
+    /* 16px inputs stop iOS from zooming on focus; larger tap targets */
+    input, select, textarea { font-size: 16px; width: 100%; }
+    .btn { width: 100%; padding: 13px 16px; }
+    .nav-link { padding: 13px 12px; }
+
+    .toast-container { left: 16px; right: 16px; top: 12px; }
+}
+
+@media (max-width: 400px) {
+    .system-clock { display: none; }
 }
